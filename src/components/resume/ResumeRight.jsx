@@ -1,6 +1,5 @@
-import React from 'react';
 import Experience from './sections/Experience';
-import Certificates from './sections/Certificates';
+// import Certificates from './sections/Certificates';
 import Skills from './sections/Skills';
 import Languages from './sections/Languages';
 import Interests from './sections/Interests';

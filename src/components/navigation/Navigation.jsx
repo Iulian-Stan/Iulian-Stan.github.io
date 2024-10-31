@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Navigation.module.css';
 
 export default function Navigation() {

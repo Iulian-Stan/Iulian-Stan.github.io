@@ -1,1 +1,1 @@
-[Who Am I](https://iulian-stan.github.io/WhoAmI/)
+[Web Resume](https://iulian-stan.github.io/)

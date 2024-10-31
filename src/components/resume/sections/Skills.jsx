@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Skills.module.css';
 
 export default function Skills({ skills }) {

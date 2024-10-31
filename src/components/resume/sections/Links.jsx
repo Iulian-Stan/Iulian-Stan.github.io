@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Links.module.css';
 
 export default function Links({ links }) {

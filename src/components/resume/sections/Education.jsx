@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Education.module.css';
 
 export default function Education({ education }) {

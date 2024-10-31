@@ -3,21 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = (_env, argv) => {
-  const devMode = argv.mode !== 'production';
-  const styleLoader = devMode ? 'style-loader' : MiniCssExtractPlugin.loader;
-  const cssLoader = {
-    loader: 'css-loader',
-    options: {
-      modules: true
-    }
-  };
+module.exports = env => {
   return {
-    entry: './src/index.jsx', // Entry point of your application
+    mode: env.production ? 'production' : 'development',
+    entry: {
+      app: [path.resolve(__dirname, './src/index.jsx')], // Entry point of your application
+      vendors: ['react', 'react-dom'] // 3rd party dependencies
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'assets/js/[name].[contenthash:8].js', // Output bundle file name
-      assetModuleFilename: 'assets/resources/[name].[contenthash:8][ext][query]',
+      filename: 'js/[name].[contenthash:8].js', // Output bundle file name
+      assetModuleFilename: 'assets/[name].[contenthash:8][ext][query]',
       clean: true
     },
     module: {
@@ -26,31 +22,34 @@ module.exports = (_env, argv) => {
         {
           test: /\.jsx$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              cacheCompression: false
-            }
-          }
+          use: ['babel-loader']
         },
         // Rule to load CSS
         {
           test: /\.css$/,
           exclude: /node_modules/,
-          oneOf: [{
-            include: /\.module\.css$/,
-            use: [
-              styleLoader,
-              cssLoader
-            ]
-          }, {
-            exclude: /\.module\.css$/,
-            use: [
-              styleLoader,
-              'css-loader'
-            ]
-          }]
+          oneOf: [
+            {
+              include: /\.module\.css$/,
+              use: [
+                env.production ? MiniCssExtractPlugin.loader : 'style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: true,
+                    import: false
+                  }
+                }
+              ]
+            },
+            {
+              exclude: /\.module\.css$/,
+              use: [
+                env.production ? MiniCssExtractPlugin.loader : 'style-loader',
+                'css-loader'
+              ]
+            }
+          ]
         },
         // Rule to load Images
         {
@@ -69,17 +68,18 @@ module.exports = (_env, argv) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'public', 'index.html'),
         filename: 'index.html',
+        template: path.join(__dirname, 'public', 'index.html'),
+        inject: true
       }),
-      new MiniCssExtractPlugin({
-        filename: 'assets/css/[name].[contenthash:8].css',
-        chunkFilename: 'assets/css/[id].[contenthash:8].css',
+      env.production && new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash:8].css',
+        chunkFilename: 'css/[id].[contenthash:8].css',
       }),
       new CopyWebpackPlugin({
-        patterns: [{ context: 'public/', from: '*.json', toType: 'dir' }]
+        patterns: [{ context: 'public/', from: '*.(json|pdf)', toType: 'dir' }]
       })
-    ],
+    ].filter(plugin => plugin),
     optimization: {
       splitChunks: {
         // include all types of chunks
@@ -88,9 +88,14 @@ module.exports = (_env, argv) => {
     },
     // Development server
     devServer: {
-      port: 9000,
+      static: {
+        directory: path.join(__dirname, 'public') // static content folder
+      },
+      compress: true,
+      port: 3000,
+      hot: true
     },
     // Development tools
-    devtool: devMode ? 'source-map' : undefined
+    devtool: env.production ? undefined : 'source-map'
   };
 };

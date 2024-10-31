@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Interests.module.css';
 
 export default function Interests({ interests }) {

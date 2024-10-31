@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './References.module.css';
 
 export default function References() {

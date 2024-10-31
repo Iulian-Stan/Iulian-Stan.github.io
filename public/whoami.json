@@ -12,7 +12,7 @@
       "country": "ROMANIA"
     },
     "occupation": "Software Engineer",
-    "education": "M.Sc. in Artificial Intelligence"
+    "education": "M.Sc. Artificial Intelligence"
   },
   "links": {
     "gmail": "mailto:iulian.stan0450@gmail.com",
@@ -27,9 +27,10 @@
   ],
   "skills": [
     "Embedded C",
-    "C++ Boost",
-    "Node.js",
-    "JavaScript / React / Webpack"
+    "C++ (Boost)",
+    "JavaScript / TypeScript (Node.js, React, Angular, Webpack)",
+    "C# / XAML (.Net, WPF)",
+    "Python"
   ],
   "experience": [
     {

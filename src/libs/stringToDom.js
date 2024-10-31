@@ -3,6 +3,6 @@
  * @param {string} html
  * @returns {DocumentFragment}
  */
-export function stringToDom(html) {
+export default function stringToDom(html) {
   return document.createRange().createContextualFragment(html);
 }

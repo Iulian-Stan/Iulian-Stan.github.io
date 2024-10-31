@@ -2,7 +2,7 @@
  * Enable or disable Christmas theme
  * @param {boolean} enable
  */
-export function christmasMode(enable) {
+export default function christmasMode(enable) {
   // TODO:
 }
   

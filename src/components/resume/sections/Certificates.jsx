@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Certificates.module.css';
 
 export default function Certificates() {

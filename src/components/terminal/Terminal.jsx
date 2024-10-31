@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { useEventContext } from '../../libs/eventContext';
+import { useEffect, useRef } from 'react';
 import DOMPurify from 'dompurify';
+import { useEventContext } from '../../libs/eventContext';
+import darkMode from '../../libs/actions/darkMode';
 import * as style from './Terminal.module.css';
 
 const test = ` ______     __    __     ______   ______     ______     __    __     __     __   __     ______     __
@@ -28,7 +29,6 @@ export default function Terminal({ commands, actionCommands, windowID }) {
 
     // add action commands
     commands.push(...actionCommands.filter(c => c.description));
-    // add clear terminal command
     commands.push({
       command: 'clear',
       description: 'Clear terminal',
@@ -36,10 +36,24 @@ export default function Terminal({ commands, actionCommands, windowID }) {
       execute: () => {
         terminalCliRef.current.replaceChildren();
         addNewLine();
-        return;
       }
     });
-    // add help command
+    commands.push({
+      command: 'exit',
+      description: 'Close terminal',
+      responseType: 'action',
+      execute: () => {
+        eventEmitter.emit('windowclose', windowID);
+      }
+    });
+    commands.push({
+      command: 'rm -rf /',
+      responseType: 'action',
+      execute: () => {
+        darkMode(true);
+        eventEmitter.emit('closeall');
+      }
+    });
     commands.push({
       command: 'help',
       responseType: 'list',

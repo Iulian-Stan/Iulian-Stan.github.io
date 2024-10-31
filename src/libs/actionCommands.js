@@ -1,8 +1,9 @@
-import confetti from 'canvas-confetti';
-import Fireworks from 'fireworks-js';
-import { darkMode } from './darkMode';
-import { halloweenMode } from './halloweenMode';
-import { christmasMode } from './christmasMode';
+import downloadCV from './actions/downloadCV';
+import darkMode from './actions/darkMode';
+import pif from './actions/confetti';
+import firework from './actions/firework';
+import halloweenMode from './actions/halloweenMode';
+import christmasMode from './actions/christmasMode';
 
 export const actionCommands = [
   {
@@ -10,10 +11,7 @@ export const actionCommands = [
     description: 'Set dark theme',
     responseType: 'action',
     execute: () => {
-      if (darkMode(true)) {
-        return 'You are now in dark mode.';
-      }
-      return 'You are already in dark mode.';
+      return darkMode(true) ? '🌒' : '🌑';
     }
   },
   {
@@ -21,70 +19,32 @@ export const actionCommands = [
     description: 'Set light theme',
     responseType: 'action',
     execute: () => {
-      if (darkMode(false)) {
-        return 'Your are now in light mode.';
-      }
-      return 'You are already in light mode.';
+      return darkMode(false) ? '🌖' : '🌕';
     }
   },
-  // {
-  //   command: 'get cv',
-  //   description: 'Download CV',
-  //   responseType: 'action',
-  //   execute: () => {}
-  // },
+  {
+    command: 'get cv',
+    // TODO: uncomment when download logic is functional
+    // description: 'Download CV',
+    responseType: 'action',
+    execute: () => {
+      downloadCV();
+      return '📄';
+    }
+  },
   {
     command: 'pif',
     responseType: 'action',
     execute: () => {
-      const count = 200;
-      const defaults = {
-        origin: { y: 0.7 },
-      };
-      function fire(particleRatio, opts) {
-        confetti(
-          Object.assign({}, defaults, opts, {
-            particleCount: Math.floor(count * particleRatio),
-          })
-        );
-      }
-      fire(0.25, {
-        spread: 26,
-        startVelocity: 55,
-      });
-      fire(0.2, {
-        spread: 60,
-      });
-      fire(0.35, {
-        spread: 100,
-        decay: 0.91,
-        scalar: 0.8,
-      });
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 25,
-        decay: 0.92,
-        scalar: 1.2,
-      });
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 45,
-      });
-      return 'Let\'s go !';
+      pif();
+      return '🎉';
     }
   },
   {
-    command: 'rm -rf /',
+    command: 'hny',
     responseType: 'action',
     execute: () => {
-      if (!document.body.classList.contains('firework')) {
-        document.body.classList.add('firework');
-        darkMode(true);
-        const fireworks = new Fireworks(document.body, {
-          mouse: { click: true, move: false, max: 7 },
-        });
-        fireworks.start();
-      }
+      firework();
       return '🎆';
     }
   },

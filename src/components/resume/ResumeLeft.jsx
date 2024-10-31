@@ -1,4 +1,3 @@
-import React from 'react';
 import Home from './sections/Home';
 import Links from './sections/Links';
 import Profile from './sections/Profile';

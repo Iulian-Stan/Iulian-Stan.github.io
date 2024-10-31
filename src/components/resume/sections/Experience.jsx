@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Experience.module.css';
 
 export default function Experience({ experience }) {

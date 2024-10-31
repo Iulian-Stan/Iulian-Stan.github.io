@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useEventContext } from '../libs/eventContext';
 import { dragElement } from '../libs/draggable';
 import * as style from './Window.module.css';

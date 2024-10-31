@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Profile.module.css';
 
 export default function Profile() {

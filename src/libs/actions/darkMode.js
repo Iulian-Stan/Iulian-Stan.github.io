@@ -2,7 +2,7 @@
  * Enable or disable dark theme
  * @param {boolean} enable
  */
-export function darkMode(enable) {
+export default function darkMode(enable) {
   if (enable) {
     document.body.classList.add('dark-mode');
   } else {

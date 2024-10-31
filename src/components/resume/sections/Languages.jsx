@@ -1,4 +1,3 @@
-import React from 'react';
 import * as style from './Languages.module.css';
 
 export default function Languages({ languages }) {

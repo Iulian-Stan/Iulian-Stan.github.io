@@ -1,7 +1,7 @@
 
-import { darkMode } from './darkMode';
-import { stringToDom } from './stringToDom';
-import img from '../resources/images/halloween-bg.jpg';
+import darkMode from './darkMode';
+import stringToDom from '../stringToDom';
+import img from '../../resources/images/halloween-bg.jpg';
 
 const bgImage = stringToDom(`<img src="${img}" class="halloween-bg" alt="Halloween background" />`);
 
@@ -9,7 +9,7 @@ const bgImage = stringToDom(`<img src="${img}" class="halloween-bg" alt="Hallowe
  * Enable or disable Halloween theme
  * @param {boolean} enable
  */
-export function halloweenMode(enable) {
+export default function halloweenMode(enable) {
   darkMode(enable);
   if (enable) {
     document.body.classList.add('halloween');
