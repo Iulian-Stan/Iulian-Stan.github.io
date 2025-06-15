@@ -7,7 +7,7 @@
 
   color: var(--text-color);
   background-color: var(--bg-color-body);+
-  
+
   h1,
   h2,
   h3,
@@ -40,7 +40,7 @@
   :global(.section) {
     padding: 1.5rem 0;
   }
-  
+
   :global(.section-title) {
     font-size: var(--h2-font-size);
     color: var(--title-color);

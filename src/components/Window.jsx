@@ -36,7 +36,7 @@ export default function Window({ children, id }) {
   const handleClose = useCallback(() => {
     eventEmitter.emit('windowclose', id);
   }, []);
-  
+
   const handleMaximize = useCallback(() => {
     if (!maximize) return;
     lastRect = windowRef.current.getBoundingClientRect();
