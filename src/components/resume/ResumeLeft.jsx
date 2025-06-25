@@ -4,7 +4,6 @@ import Profile from './sections/Profile';
 import Education from './sections/Education';
 import * as style from './ResumeLeft.module.css';
 
-
 export default function ResumeLeft({ bio, links, profile, education, skills }) {
   return (
     <div className={style.resume__left}>
